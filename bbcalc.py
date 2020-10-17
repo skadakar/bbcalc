@@ -19,19 +19,24 @@
 
 import math
 
-def residual_simple(energy_j,weight_g,distance_m):
-    weight_kg = float(weight_g) / 1000
-    dragcoefficient = float(0.47)
-    airdensity_kgm3 = float(1.225)
-    diameter_mm = int(6)
-    radius_m = diameter_mm / 1000 / 2
-    crossection_m2 = math.pi*((float(radius_m))**2)
-    speed_ms = math.sqrt(float(energy_j)/(0.5*float(weight_kg)))
-    step1 = airdensity_kgm3 * crossection_m2 * dragcoefficient
-    step2 = 2 * weight_kg 
-    result= speed_ms *math.exp(-((step1)/(step2)*int(distance_m)))
-    return result
-
+def residual_simple(energy_j , weight_g , distance_m):
+    if float(energy_j) * float(weight_g) * float(distance_m) == 0:
+        print("Cannot have 0 as input value.")
+    else:
+        weight_kg = float(weight_g) / 1000
+        dragcoefficient = float(0.47)
+        airdensity_kgm3 = float(1.225)
+        diameter_mm = int(6)
+        radius_m = diameter_mm / 1000 / 2
+        crossection_m2 = math.pi*((float(radius_m))**2)
+        speed_ms = math.sqrt(float(energy_j)/(0.5*float(weight_kg)))
+        step1 = airdensity_kgm3 * crossection_m2 * dragcoefficient
+        step2 = 2 * weight_kg 
+        speed_at_distance = speed_ms *math.exp(-((step1)/(step2)*int(distance_m)))
+        energy_at_distance = 0.5 * weight_kg * speed_at_distance **2
+        print(f"Energy at {distance_m}m is {energy_at_distance}")
+        print(f"Speed at {distance_m}m is {speed_at_distance}")
+        return speed_at_distance,energy_at_distance
 
 # Get user inputs
 energy = input("Energy at muzzle in joule ")
@@ -41,6 +46,3 @@ distance = input("Distance in meters ")
 # Send off the input to the function get_rema
 get_residual = residual_simple(energy,weight,distance)
 
-# Print actual results
-print("Maximum potential residual energy at " + str(distance) + " meters with " + str(weight) + " projectiles.")
-print(str(round(get_residual,2)) + " J")
