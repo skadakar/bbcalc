@@ -16,7 +16,6 @@
 #crossection_m2 = math.pi*((radius_m)**2)
 #distance_m = 30
 #speed_ms = math.sqrt(energy_j/(0.5*weight_kg))
-#We don't know how to calculate magnus effect vs gravity /shrug
 
 import math
 
@@ -40,14 +39,12 @@ def residual_simple(energy_j: float, weight_g: float, distance_m: float):
 
 #Request input and print result only if it's run as a script. 
 if __name__ == "__main__":
-    # All kode som gjør noe
     # Get user inputs
     energy = float(input("Energy at muzzle in joule "))
     weight = float(input("Projectile weight in grams "))
     distance = float(input("Distance in meters "))
 
-    # Send off the input to the function get_rema
     speed_at_distance, energy_at_distance = residual_simple(energy, weight, distance)
-
+    
     print(f"Energy at {distance}m is {energy_at_distance}")
     print(f"Speed at {distance}m is {speed_at_distance}")
