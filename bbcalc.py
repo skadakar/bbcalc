@@ -38,13 +38,16 @@ def residual_simple(energy_j: float, weight_g: float, distance_m: float):
     energy_at_distance = 0.5 * weight_kg * speed_at_distance ** 2
     return speed_at_distance, energy_at_distance
 
-# Get user inputs
-energy = float(input("Energy at muzzle in joule "))
-weight = float(input("Projectile weight in grams "))
-distance = float(input("Distance in meters "))
+#Request input and print result only if it's run as a script. 
+if __name__ == "__main__":
+    # All kode som gjør noe
+    # Get user inputs
+    energy = float(input("Energy at muzzle in joule "))
+    weight = float(input("Projectile weight in grams "))
+    distance = float(input("Distance in meters "))
 
-# Send off the input to the function get_rema
-speed_at_distance, energy_at_distance = residual_simple(energy, weight, distance)
+    # Send off the input to the function get_rema
+    speed_at_distance, energy_at_distance = residual_simple(energy, weight, distance)
 
-print(f"Energy at {distance}m is {energy_at_distance}")
-print(f"Speed at {distance}m is {speed_at_distance}")
+    print(f"Energy at {distance}m is {energy_at_distance}")
+    print(f"Speed at {distance}m is {speed_at_distance}")
